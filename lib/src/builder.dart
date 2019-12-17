@@ -9,7 +9,6 @@ import 'package:markdown/markdown.dart' as md;
 import '_functions_io.dart' if (dart.library.html) '_functions_web.dart';
 import 'style_sheet.dart';
 import 'widget.dart';
-import 'widget.dart';
 
 const List<String> _kBlockTags = const <String>[
   'p',
