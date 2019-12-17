@@ -32,6 +32,11 @@ typedef Widget MarkdownImageBuilder(Uri uri, String? title, String? alt);
 /// Used by [MarkdownWidget.checkboxBuilder]
 typedef Widget MarkdownCheckboxBuilder(bool value);
 
+/// Signature for custom bullet widget.
+///
+/// Used by [MarkdownWidget.bulletBuilder]
+typedef Widget MarkdownBulletBuilder(int index);
+
 /// Creates a format [TextSpan] given a string.
 ///
 /// Used by [MarkdownWidget] to highlight the contents of `pre` elements.
@@ -137,6 +142,7 @@ abstract class MarkdownWidget extends StatefulWidget {
     this.imageBuilder,
     this.checkboxBuilder,
     this.builders = const {},
+    this.bulletBuilder,
     this.fitContent = false,
     this.listItemCrossAxisAlignment =
         MarkdownListItemCrossAxisAlignment.baseline,
@@ -190,6 +196,9 @@ abstract class MarkdownWidget extends StatefulWidget {
 
   /// Call when build a checkbox widget.
   final MarkdownCheckboxBuilder? checkboxBuilder;
+
+  /// Called when building a bullet
+  final MarkdownBulletBuilder bulletBuilder;
 
   /// Render certain tags, usually used with [extensionSet]
   ///
