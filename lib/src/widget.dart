@@ -286,6 +286,7 @@ class _MarkdownWidgetState extends State<MarkdownWidget>
       imageDirectory: widget.imageDirectory,
       imageBuilder: widget.imageBuilder,
       checkboxBuilder: widget.checkboxBuilder,
+      bulletBuilder: widget.bulletBuilder,
       builders: widget.builders,
       fitContent: widget.fitContent,
       listItemCrossAxisAlignment: widget.listItemCrossAxisAlignment,

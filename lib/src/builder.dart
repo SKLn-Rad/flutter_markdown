@@ -9,6 +9,7 @@ import 'package:markdown/markdown.dart' as md;
 import '_functions_io.dart' if (dart.library.html) '_functions_web.dart';
 import 'style_sheet.dart';
 import 'widget.dart';
+import 'widget.dart';
 
 const List<String> _kBlockTags = const <String>[
   'p',
@@ -101,6 +102,7 @@ class MarkdownBuilder implements md.NodeVisitor {
     required this.checkboxBuilder,
     required this.builders,
     required this.listItemCrossAxisAlignment,
+    @required this.bulletBuilder,
     this.fitContent = false,
     this.onTapText,
   });
@@ -124,6 +126,9 @@ class MarkdownBuilder implements md.NodeVisitor {
 
   /// Call when build a checkbox widget.
   final MarkdownCheckboxBuilder? checkboxBuilder;
+
+  /// Called when building a custom bullet.
+  final MarkdownBulletBuilder bulletBuilder;
 
   /// Call when build a custom widget.
   final Map<String, MarkdownElementBuilder> builders;
@@ -497,6 +502,11 @@ class MarkdownBuilder implements md.NodeVisitor {
   }
 
   Widget _buildBullet(String listTag) {
+    final int index = _blocks.last.nextListIndex;
+    if (bulletBuilder != null) {
+      return bulletBuilder(index);
+    }
+
     if (listTag == 'ul') {
       return Padding(
         padding: styleSheet.listBulletPadding!,
@@ -508,7 +518,6 @@ class MarkdownBuilder implements md.NodeVisitor {
       );
     }
 
-    final int index = _blocks.last.nextListIndex;
     return Padding(
       padding: styleSheet.listBulletPadding!,
       child: Text(
