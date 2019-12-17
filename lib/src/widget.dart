@@ -344,6 +344,7 @@ class MarkdownBody extends MarkdownWidget {
     Key? key,
     required String data,
     bool selectable = false,
+    MarkdownBulletBuilder bulletBuilder,
     MarkdownStyleSheet? styleSheet,
     MarkdownStyleSheetBaseTheme? styleSheetTheme,
     SyntaxHighlighter? syntaxHighlighter,
@@ -377,6 +378,7 @@ class MarkdownBody extends MarkdownWidget {
           checkboxBuilder: checkboxBuilder,
           builders: builders,
           listItemCrossAxisAlignment: listItemCrossAxisAlignment,
+          bulletBuilder: bulletBuilder,
         );
 
   /// See [ScrollView.shrinkWrap]
@@ -426,6 +428,7 @@ class Markdown extends MarkdownWidget {
     Map<String, MarkdownElementBuilder> builders = const {},
     MarkdownListItemCrossAxisAlignment listItemCrossAxisAlignment =
         MarkdownListItemCrossAxisAlignment.baseline,
+    MarkdownBulletBuilder bulletBuilder,
     this.padding = const EdgeInsets.all(16.0),
     this.controller,
     this.physics,
@@ -447,6 +450,7 @@ class Markdown extends MarkdownWidget {
           checkboxBuilder: checkboxBuilder,
           builders: builders,
           listItemCrossAxisAlignment: listItemCrossAxisAlignment,
+          bulletBuilder: bulletBuilder,
         );
 
   /// The amount of space by which to inset the children.
