@@ -35,7 +35,15 @@ typedef Widget MarkdownCheckboxBuilder(bool value);
 /// Signature for custom bullet widget.
 ///
 /// Used by [MarkdownWidget.bulletBuilder]
-typedef Widget MarkdownBulletBuilder(int index);
+typedef Widget MarkdownBulletBuilder(int index, BulletStyle style);
+
+/// Enumeration sent to the user when calling [MarkdownBulletBuilder]
+/// 
+/// Use this to differentiate the bullet styling when building your own.
+enum BulletStyle {
+  orderedList,
+  unorderedList,
+}
 
 /// Creates a format [TextSpan] given a string.
 ///

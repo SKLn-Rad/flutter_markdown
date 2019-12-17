@@ -623,6 +623,26 @@ void main() {
       ]);
     });
 
+    testWidgets(' - bulletBuilder', (WidgetTester tester) async {
+      final String data = '* Item 1\n* Item 2\n1) Item 3\n2) Item 4';
+      final MarkdownBulletBuilder builder = (int index, BulletStyle style) => Text('$index ${style == BulletStyle.orderedList ? 'ordered' : 'unordered'}');
+
+      await tester.pumpWidget(_boilerplate(Markdown(data: data, bulletBuilder: builder)));
+
+      final Iterable<Widget> widgets = tester.allWidgets;
+      
+      _expectTextStrings(widgets, <String>[
+        '0 unordered',
+        'Item 1',
+        '1 unordered',
+        'Item 2',
+        '0 ordered',
+        'Item 3',
+        '1 ordered',
+        'Item 4',
+      ]);
+    });
+
     testWidgets(' - should use style textScaleFactor in RichText', (WidgetTester tester) async {
       await tester.pumpWidget(_boilerplate(
         MarkdownBody(

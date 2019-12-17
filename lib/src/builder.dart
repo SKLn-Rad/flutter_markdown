@@ -502,18 +502,17 @@ class MarkdownBuilder implements md.NodeVisitor {
 
   Widget _buildBullet(String listTag) {
     final int index = _blocks.last.nextListIndex;
+    final bool isUnordered = listTag == 'ul';
+
     if (bulletBuilder != null) {
-      return bulletBuilder(index);
+      return bulletBuilder(index, isUnordered ? BulletStyle.unorderedList : BulletStyle.orderedList);
     }
 
-    if (listTag == 'ul') {
-      return Padding(
-        padding: styleSheet.listBulletPadding!,
-        child: Text(
-          '•',
-          textAlign: TextAlign.center,
-          style: styleSheet.listBullet,
-        ),
+    if (isUnordered) {
+      return Text(
+        '•',
+        textAlign: TextAlign.center,
+        style: styleSheet.listBullet,
       );
     }
 
